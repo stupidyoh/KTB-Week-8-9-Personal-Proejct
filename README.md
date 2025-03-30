@@ -20,6 +20,7 @@
 ## 데이터셋
 ### Kaggle Orange Disease Dataset
 - 1,090장의 RGB 이미지로 fresh, blackspot, canker, grenning 4개의 클래스를 가진 데이터셋
+- 학습/테스트 데이터셋 비율 9:1
 <img src="src/class_examples.png" width="70%" />
 <br>
 
@@ -42,6 +43,7 @@
 ### Result of Test 
 - 학습 정확도 94.45%, 검증 정확도 99.49%
 - 테스트 정확도 93.94%
+<img src="src/result_test.png" width="100%" />
 
 <table>
   <tr>
@@ -57,7 +59,7 @@
 ### Result of Real Image Test
 - 테스트 정확도 50%
 - 학습 및 검증단계와 상이한 결과
-<img src="src/real_result.png" width="70%" />
+<img src="src/real_result.png" width="100%" />
 <br>
 <br>
 
