@@ -1,4 +1,8 @@
-# Ray Tune을 활용한 오렌지 질병 데이터셋 분류 모델 학습 하이퍼 파라미터 튜닝
+# Training Orange Disease Dataset Classification Model with Ray Tune for Hyperparameters
+**Ray Tune을 활용한 오렌지 질병 데이터셋 분류 모델 학습 하이퍼 파라미터 튜닝**
+
+<br><br>
+
 
 ## 프로젝트 소개
 * 딥러닝 기술을 활용하여 오렌지의 질병을 자동으로 탐지하고 분류하는 시스템
@@ -9,43 +13,70 @@
 ## 프로젝트 기간
 * 기간: 2025.03.17(월) ~ 2025.03.30(일)
 
+
+
 ## 사용 기술 및 모델
+* Python
 * PyTorch
 * Ray
 * SQLite
-* EfficientNetV2-S
-<br>
+* EfficientNetV2-S(Feature Extraction)
+
 
 
 ## 데이터셋
-### Kaggle Orange Disease Dataset
-- 1,090장의 RGB 이미지로 fresh, blackspot, canker, grenning 4개의 클래스를 가진 데이터셋
-- 학습/테스트 데이터셋 비율 9:1
+### [Kaggle Orange Disease Dataset](https://www.kaggle.com/datasets/jonathansilva2020/orange-diseases-dataset)
+- **정보** : 1,090장(학습:검증 = 9:1)의 RGB 이미지
+- **클래스** : 4종(fresh, blackspot, canker, grenning)
+- **예시**
 <img src="src/class_examples.png" width="70%" />
-<br>
 
-### Result of Image Analysis
+### 실제 테스트 이미지셋
+- **정보** : 8장의 Kaggle 데이터셋 외 RGB 이미지
+- **클래스** : 4종(fresh, blackspot, canker, grenning)
+- **예시**
+<img src="src/real_imageset.png" width="70%" />
+
+
+
+## 이미지 분석
 - 밝기, RGB, HSV, Texture 특성 분석 및 상관관계 분석
 - 3D 산점도 분포상 blackspot과 canker의 분류가 명확하지 않음
 <img src="src/3d_scatter.png" width="70%" />
 
-### Real Test Imageset
-- 8장의 RGB 이미지로 fresh, blackspot, canker, grenning 4개의 클래스를 가진 실제 이미지셋
-<img src="src/real_imageset.png" width="70%" />
+
+
+
+## 하이퍼파라미터 튜닝
+### 검색공간
+- **Learning rate**: loguniform(1e-5, 1e-3)
+- **Batch size**: choice([8, 16, 32])
+- **Weight Decay**: loguniform(1e-6, 1e-3)
+- **Hidden dimension**: choice([256, 512, 1024, 2048])
+- **Dropout ratio**: choice([0.2, 0.3, 0.4, 0.5])
+- **Number of layers**: choice([2, 3, 4])
+
 <br>
 
-## 학습 결과
-### 
-- 손실함수: CrossEntropyLoss
-- 옵티마이저: AdamW
-- 스케줄러: CosinAnnealingLR
+- **Data augmentation**
+- **ASHAScheduler** : 하이퍼파라미터 튜닝 중 조기 중단
+- **HyperOptSearch** : 베이지안 최적화 기반 하이퍼파라미터 탐색
 
-### Optimized Hyperparameters with Ray Tune
+<br>
+
+- **Loss Function**: CrossEntropyLoss
+- **Optimizer**: AdamW
+- **Scheduler**: CosinAnnealingLR
+
+
+### 최적의 하이퍼파라미터 조합
 |Learning Rate|Batch Size|Weight Decay|Hidden Dimension|Dropout Ratio|# of Layers|
 |:---|:---|:---|:---|:---|:---|
 |0.000928194|8|8.95416e-06|1024|0.3|2|
+<br>
 
-### Result of Test 
+## 학습 결과
+### Kaggle 테스트 이미지
 - 학습 정확도 94.45%, 검증 정확도 99.49%
 - 테스트 정확도 93.94%
 <img src="src/result_test.png" width="100%" />
@@ -61,9 +92,10 @@
   </tr>
 </table>
 
-### Result of Real Image Test
+### 실제 이미지
 - 테스트 정확도 50%
 - 학습 및 검증단계와 상이한 결과
+- 이미지 분석 결과 학습 데이터셋과 다른 이미지 특성(밝기, 채널별 강도, 텍스처 등) 보유
 <img src="src/real_result.png" width="100%" />
 <br>
 <br>
