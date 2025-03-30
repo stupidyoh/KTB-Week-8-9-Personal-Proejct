@@ -20,6 +20,7 @@
 * PyTorch
 * Ray
 * SQLite
+* Tensorboard
 * EfficientNetV2-S(Feature Extraction)
 
 
