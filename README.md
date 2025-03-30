@@ -35,6 +35,11 @@
 <br>
 
 ## 학습 결과
+### 
+- 손실함수: CrossEntropyLoss
+- 옵티마이저: AdamW
+- 스케줄러: CosinAnnealingLR
+
 ### Optimized Hyperparameters with Ray Tune
 |Learning Rate|Batch Size|Weight Decay|Hidden Dimension|Dropout Ratio|# of Layers|
 |:---|:---|:---|:---|:---|:---|
