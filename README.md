@@ -9,19 +9,58 @@
 ## 프로젝트 기간
 * 기간: 2025.03.17(월) ~ 2025.03.30(일)
 
-## 사용 기술
+## 사용 기술 및 모델
 * PyTorch
 * Ray
 * SQLite
+* EfficientNetV2-S
+<br>
+
 
 ## 데이터셋
-* 데이터셋 설명
-* 이미지 분석
+### Kaggle Orange Disease Dataset
+- 1,090장의 RGB 이미지로 fresh, blackspot, canker, grenning 4개의 클래스를 가진 데이터셋
+<img src="src/class_examples.png" width="70%" />
+<br>
 
-## 모델 구조
-* 모델 구조 이미지 첨부
+### Result of Image Analysis
+- 밝기, RGB, HSV, Texture 특성 분석 및 상관관계 분석
+- 3D 산점도 분포상 blackspot과 canker의 분류가 명확하지 않음
+<img src="src/3d_scatter.png" width="70%" />
+
+### Real Test Imageset
+- 8장의 RGB 이미지로 fresh, blackspot, canker, grenning 4개의 클래스를 가진 실제 이미지셋
+<img src="src/real_imageset.png" width="70%" />
+<br>
 
 ## 학습 결과
+### Optimized Hyperparameters with Ray Tune
+|Learning Rate|Batch Size|Weight Decay|Hidden Dimension|Dropout Ratio|# of Layers|
+|:---|:---|:---|:---|:---|:---|
+|0.000928194|8|8.95416e-06|1024|0.3|2|
+
+### Result of Test 
+- 학습 정확도 94.45%, 검증 정확도 99.49%
+- 테스트 정확도 93.94%
+
+<table>
+  <tr>
+    <td><img src="src/train_loss.png" width="100%"/></td>
+    <td><img src="src/train_acc.png" width="100%"/></td>
+  </tr>
+  <tr>
+    <td><img src="src/val_loss.png" width="100%" /></td>
+    <td><img src="src/val_acc.png" width="100%" /></td>
+  </tr>
+</table>
+
+### Result of Real Image Test
+- 테스트 정확도 50%
+- 학습 및 검증단계와 상이한 결과
+<img src="src/real_result.png" width="70%" />
+<br>
+<br>
+
 
 ## 프로젝트 후기
 ### Keep
